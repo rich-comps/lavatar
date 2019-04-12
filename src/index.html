@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=5.0" />
+    <title>Stencil Component Starter</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <script src="/build/rich-lavatar.js"></script>
+  </head>
+  <body>
+    <div class="container py-3">
+      <h1 class="display-4">Lavatar Web Component</h1>
+      <br />
+    </div>
+    <script>
+      const data = [
+        {
+          label: "Empty",
+          skip: true
+        },
+        {
+          label: "Name"
+        },
+        {
+          label: "Length",
+          op: x => {
+            x.setAttribute("length", 1);
+          }
+        },
+        {
+          label: "Background, Color",
+          op: x => {
+            x.setAttribute("background", "#123");
+            x.setAttribute("color", "#EDC");
+          }
+        },
+        {
+          label: "Percent, Size",
+          op: x => {
+            x.setAttribute("percent", "33");
+            x.setAttribute("size", "100");
+          }
+        },
+        {
+          label: "Bold, Rounded",
+          op: x => {
+            x.setAttribute("bold", "true");
+            x.setAttribute("rounded", "true");
+          }
+        },
+        {
+          label: "Lowercase",
+          op: x => {
+            x.setAttribute("lowercase", "true");
+            x.setAttribute("name", "Mixed+case");
+          },
+          skip: true
+        },
+        {
+          label: "Uppercase",
+          op: x => {
+            x.setAttribute("uppercase", "true");
+            x.setAttribute("name", "Mixed+case");
+          },
+          skip: true
+        }
+      ];
+
+      data.forEach((x, i) => {
+        const wrapper = document.createElement("div");
+        const el = document.createElement("rich-lavatar");
+
+        if (i) {
+          wrapper.appendChild(document.createElement("hr"));
+        }
+
+        if (x.label) {
+          const label = document.createElement("h3");
+
+          label.innerText = x.label;
+
+          wrapper.appendChild(label);
+        }
+
+        const codeWrapper = document.createElement("p");
+        const code = document.createElement("code");
+
+        codeWrapper.appendChild(code);
+        wrapper.appendChild(codeWrapper);
+
+        if (x.op) {
+          x.op(el);
+        }
+
+        if (!x.skip) {
+          el.setAttribute("name", "Chris+Richmond");
+        }
+
+        code.innerText = el.outerHTML;
+
+        wrapper.appendChild(el);
+
+        document.querySelector(".container").appendChild(wrapper);
+      });
+    </script>
+  </body>
+</html>
